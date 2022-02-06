@@ -23,7 +23,7 @@ open class MainFragment : Fragment(), CoroutineScope {
 
     override val coroutineContext = Dispatchers.Main
     private var cachedFiles: MutableList<String> = mutableListOf()
-    private var descriptions: MutableList<String> = mutableListOf()
+    private var descriptionsFiles: MutableList<String> = mutableListOf()
     private val requestOptions = RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL)
     private var fileIndex = -1
     private var pageCounter = 0
@@ -53,7 +53,7 @@ open class MainFragment : Fragment(), CoroutineScope {
         try {
             ++fileIndex
             if (fileIndex < cachedFiles.size) {
-                textView.text = descriptions[fileIndex]
+                textView.text = descriptionsFiles[fileIndex]
                 Glide.with(this).asGif()
                     .placeholder(circularProgressDrawable)
                     .transition(DrawableTransitionOptions.withCrossFade())
@@ -120,7 +120,7 @@ open class MainFragment : Fragment(), CoroutineScope {
                 .apply(requestOptions)
                 .into(imageView)
             cachedFiles.add(gifUrl)
-            descriptions.add(description)
+            descriptionsFiles.add(description)
         } catch (e: Exception) {
             val myToast = Toast.makeText(
                 requireContext(),
@@ -131,8 +131,8 @@ open class MainFragment : Fragment(), CoroutineScope {
             if (fileIndex < cachedFiles.size) {
                 cachedFiles.removeAt(fileIndex)
             }
-            if (fileIndex < descriptions.size && cachedFiles.size != descriptions.size) {
-                descriptions.removeAt(fileIndex)
+            if (fileIndex < descriptionsFiles.size && cachedFiles.size != descriptionsFiles.size) {
+                descriptionsFiles.removeAt(fileIndex)
             }
             getPreviousGif()
         }
@@ -143,7 +143,7 @@ open class MainFragment : Fragment(), CoroutineScope {
 
         --fileIndex
         try {
-            textView.text = descriptions[fileIndex]
+            textView.text = descriptionsFiles[fileIndex]
             Glide.with(this).asGif()
                 .placeholder(circularProgressDrawable)
                 .transition(DrawableTransitionOptions.withCrossFade())
@@ -162,8 +162,8 @@ open class MainFragment : Fragment(), CoroutineScope {
             if (fileIndex < cachedFiles.size) {
                 cachedFiles.removeAt(fileIndex)
             }
-            if (fileIndex < descriptions.size) {
-                descriptions.removeAt(fileIndex)
+            if (fileIndex < descriptionsFiles.size) {
+                descriptionsFiles.removeAt(fileIndex)
             }
         }
     }
