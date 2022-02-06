@@ -6,14 +6,14 @@ import com.github.kittinunf.result.Result
 
 class ResponseStatus() {
     private lateinit var response : Result<FuelJson, FuelError>
-    private var e : Exception? = null
+    private var error : Exception? = null
 
-    fun setResponse(r: Result<FuelJson, FuelError>) {
-        response = r
+    fun setResponse(result: Result<FuelJson, FuelError>) {
+        response = result
     }
 
-    fun setException(ex : Exception) {
-        e = ex
+    fun setException(error : Exception) {
+        this.error = error
     }
 
     fun getResponse() : Result<FuelJson, FuelError> {
@@ -21,6 +21,6 @@ class ResponseStatus() {
     }
 
     fun getException() : Exception? {
-        return e
+        return error
     }
 }

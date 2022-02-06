@@ -9,31 +9,33 @@ import android.widget.ImageButton
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.meleshkomd.funnyanimationapp.R
 
-class LatestSectionFragment : MainFragment() {
+class SectionFragment(categoryRequest: String) : MainFragment() {
+
+    val categoryPage: String = categoryRequest
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_latest_section, container, false)
+        val view = inflater.inflate(R.layout.fragment_section, container, false)
         initializeGlobalConstants(view)
         circularProgressDrawable.strokeWidth = 5f
         circularProgressDrawable.centerRadius = 30f
         circularProgressDrawable.setColorSchemeColors(Color.BLUE)
         circularProgressDrawable.start()
-        val buttonBack: ImageButton = view.findViewById(R.id.btnBackLatest) as ImageButton
+        val buttonBack: ImageButton = view.findViewById(R.id.btnBack) as ImageButton
         buttonBack.setOnClickListener { getPreviousGif() }
-        val buttonNext: ImageButton = view.findViewById(R.id.btnNextLatest) as ImageButton
+        val buttonNext: ImageButton = view.findViewById(R.id.btnNext) as ImageButton
         buttonNext.setOnClickListener { getNextGif() }
         getCurrentGif()
         return view
     }
 
     private fun initializeGlobalConstants(view: View) {
-        category = "latest"
-        imageView = view.findViewById(R.id.gifImageLatest)
-        textView = view.findViewById(R.id.titleLatest)
+        category = categoryPage
+        imageView = view.findViewById(R.id.gifImage)
+        textView = view.findViewById(R.id.title)
         circularProgressDrawable = CircularProgressDrawable(imageView.context)
     }
 }
